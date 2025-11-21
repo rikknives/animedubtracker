@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Anime Dub Tracker</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#fff;font-family:Arial,sans-serif;padding:20px}
+h1{font-size:3rem;text-align:center;background:linear-gradient(90deg,#e50914,#ff6b35);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px}
+.updated{text-align:center;color:#999;margin-bottom:30px}
+.section{margin:30px 0}
+.section h2{background:#e50914;padding:15px 20px;border-radius:8px;margin-bottom:15px}
+.day{background:#1a1a1a;padding:12px 20px;margin:15px 0;border-left:4px solid #e50914;font-size:1.3rem}
+.anime{background:#141414;padding:12px 20px;margin:8px 0;border-radius:4px;display:flex;justify-content:space-between;transition:0.3s}
+.anime:hover{background:#e50914;transform:translateX(5px)}
+.ep{color:#46d369;font-weight:bold}
+.footer{text-align:center;margin-top:50px;color:#666}
+.footer a{color:#e50914;text-decoration:none}
+</style>
+</head>
+<body>
+<h1>🎬 Anime Dub Tracker</h1>
+<div class="updated">Last updated: <span id="timestamp">Loading...</span></div>
+<div id="content">Loading data...</div>
+<div class="footer">Data from <a href="https://myanimelist.net/forum/?topicid=1692966" target="_blank">MyAnimeList Forum</a></div>
+<script>
+fetch('data.json?v='+Date.now())
+.then(r=>r.json())
+.then(d=>{
+document.getElementById('timestamp').textContent=d.updated;
+document.getElementById('content').innerHTML=d.html;
+})
+.catch(e=>document.getElementById('content').innerHTML='<p style="text-align:center;color:#e50914">Error loading data</p>');
+</script>
+</body>
+</html>
